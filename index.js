@@ -30,7 +30,7 @@ function updateMap(latitude, longitude) {
     mymap.panTo([latitude, longitude]);
     //Location Marker
     var marker = L.marker([latitude, longitude]).addTo(mymap);
-    marker.bindPopup("Your Location").openPopup();
+    marker.bindPopup("IP Location").openPopup();
 }
 
 

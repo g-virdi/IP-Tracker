@@ -98,25 +98,25 @@ body {
     .result-information {
         height: 10rem;
         margin-top: -5rem;
+
        .info-display{
            height: 90%;
            display: flex;
            justify-content: center;
            align-items: center;
-           .info-section {
-            flex-grow: 1;
 
-            p {
-                font-size: 24px;
-            }
+           .info-section {
+                flex-grow: 1;
+
+                p {
+                    font-size: 24px;
+                }
             
            }
 
            .border-right {
                border-right: 1px solid $darkGray;
            }
-           
-
        }
     }
 

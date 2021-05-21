@@ -7,36 +7,46 @@ const getISP = document.getElementById("ispField");
 //API key
 const geo_api_key = 'at_Bv1Nt8sx0rKdFwooe9snR5R3NZQ3v';
 
-
 let latitude;
 let longitude;
 
-/*Get User Ipadress
+//Adds Map to #mapip div
+var mymap = L.map('mapid', {
+    center: [0, 0],
+    zoom: 13,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+}).addTo(mymap);
+
+
+/*Get User Ipadress, makes new Request String & passes String to requestMaker function*/
 fetch("https://api.ipify.org?format=json")
     .then(results => results.json())
     .then(data => {
-           console.log(data.ip);
-           
-}) */
+        let requestUrl = "https://geo.ipify.org/api/v1?apiKey=" + geo_api_key + "&ipAddress=" + data.ip;
+        requestMaker(requestUrl)      
+}) 
 
-var mymap = L.map('mapid').setView([50.1109, 8.6821], 13);
-const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-let tiles = L.tileLayer(tileUrl, {attribution});
-tiles.addTo(mymap);
+//Gets value from Inputfield, creates new request String & passes String to requestMaker function
+function searchLocation() {
+    const getIpadress = $("#inputField").val();
+    const requestUrl = "https://geo.ipify.org/api/v1?apiKey=" + geo_api_key + "&ipAddress=" + getIpadress;
+    requestMaker(requestUrl)
+}
 
-function updateMap(latitude, longitude) {
-    //Updates Map
+//Updates map with new latitude & longitude values 
+function mapUpdater(latitude, longitude) {
     mymap.panTo([latitude, longitude]);
     //Location Marker
     var marker = L.marker([latitude, longitude]).addTo(mymap);
     marker.bindPopup("IP Location").openPopup();
 }
 
-
-function searchLocation() {
-    var getIpadress = $("#inputField").val();
-    let requestUrl = "https://geo.ipify.org/api/v1?apiKey=" + geo_api_key + "&ipAddress=" + getIpadress;
+//Makes the request to API
+function requestMaker(requestUrl) {
     fetch(requestUrl)
         .then(results => results.json())
         .then((data) => {
@@ -49,12 +59,10 @@ function searchLocation() {
             latitude = data.location.lat;
             longitude = data.location.lng;
 
-            updateMap(latitude, longitude);
-            
+            mapUpdater(latitude, longitude)
         })
         .catch(error => {
             console.log(error);
             alert("Input is not an valid IP")
         })
 }
-

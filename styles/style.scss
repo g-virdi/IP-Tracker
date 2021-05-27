@@ -25,12 +25,14 @@ body {
     form {
         margin: 0 auto 3rem;
         padding-left: 10%;
+        padding-right: 10%;
         display: flex;
+
         input {
+            flex: 1;
             border-radius: 7px 0px 0px 7px;
             height: 2.5rem;
             border: none;
-            width: 80%;
             text-align: center;
         }
 

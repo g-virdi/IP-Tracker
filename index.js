@@ -22,7 +22,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(mymap);
 
 
-/*Get User Ipadress, makes new Request String & passes String to requestMaker function*/
+//Get User Ipadress, makes new Request String & passes String to requestMaker function
 fetch("https://api.ipify.org?format=json")
     .then(results => results.json())
     .then(data => {
@@ -64,5 +64,5 @@ function requestMaker(requestUrl) {
         .catch(error => {
             console.log(error);
             alert("Input is not an valid IP")
-        })
-}
+        })    
+} 

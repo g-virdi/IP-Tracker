@@ -24,16 +24,19 @@ body {
 .head form {
   margin: 0 auto 3rem;
   padding-left: 10%;
+  padding-right: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .head form input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   border-radius: 7px 0px 0px 7px;
   height: 2.5rem;
   border: none;
-  width: 80%;
   text-align: center;
 }
 
